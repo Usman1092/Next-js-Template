@@ -1,4 +1,4 @@
-import React,{useEffect, useState} from "react";
+import React,{ useState} from "react";
 import Link from "next/link";
 import { auth,provider,gitProvider } from "components/firebase";
 import {signInWithPopup,signInWithEmailAndPassword} from 'firebase/auth';
@@ -14,7 +14,7 @@ const router = useRouter();
 const googleAuth=()=>{
 signInWithPopup(auth,provider).then(async(data)=>{
   const token=await data.user.getIdToken();
-  nookies.set(undefined,"authToken",token,{path:"/auth/login"});
+  nookies.set(undefined,"authToken",token,{path:"/"});
   router.push('/admin/dashboard');
 })
 .catch((error) => {

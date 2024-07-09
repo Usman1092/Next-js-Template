@@ -7,6 +7,8 @@ const PagesDropdown = () => {
   const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
   const btnDropdownRef = React.createRef();
   const popoverDropdownRef = React.createRef();
+ 
+
   const openDropdownPopover = () => {
     createPopper(btnDropdownRef.current, popoverDropdownRef.current, {
       placement: "bottom-start",
@@ -43,12 +45,13 @@ const PagesDropdown = () => {
         >
           Admin Layout
         </span>
-        <Link href="/admin/dashboard" legacyBehavior>
+        <Link href={"/admin/dashboard"} legacyBehavior>
           <a
             href="#pablo"
             className={
               "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
             }
+            
           >
             Dashboard
           </a>
@@ -59,6 +62,7 @@ const PagesDropdown = () => {
             className={
               "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
             }
+          
           >
             Settings
           </a>
@@ -69,16 +73,18 @@ const PagesDropdown = () => {
             className={
               "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
             }
+            
           >
             Tables
           </a>
         </Link>
-        <Link href="/admin/maps" legacyBehavior>
+        <Link href="/admin/maps" legacyBehavior> 
           <a
             href="#pablo"
             className={
               "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
             }
+           
           >
             Maps
           </a>
