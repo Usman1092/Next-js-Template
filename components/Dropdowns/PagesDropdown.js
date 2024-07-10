@@ -1,26 +1,26 @@
 import React,{useState,useEffect} from "react";
 import Link from "next/link";
 import { createPopper } from "@popperjs/core";
-import { useRouter } from "next/router";
-import nookies from 'nookies'
+// import { useRouter } from "next/router";
+// import nookies from 'nookies'
 
 
 const PagesDropdown = () => {
-  const router = useRouter();
-const [token, setToken] = useState(null);
+//   const router = useRouter();
+// const [token, setToken] = useState(null);
 
-useEffect(() => {
-  const cookies = nookies.get();
-  setToken(cookies.authToken);
-}, []);
-console.log(token);
-const handleClick = (e) => {
-  if (!token) {
-    e.preventDefault(); // Prevent the default link behavior
+// useEffect(() => {
+//   const cookies = nookies.get();
+//   setToken(cookies.authToken);
+// }, []);
+// console.log(token);
+// const handleClick = (e) => {
+//   if (!token) {
+//     e.preventDefault(); // Prevent the default link behavior
    
-    router.push("/auth/login"); // Redirect to the login page
-  }
-};
+//     router.push("/auth/login"); // Redirect to the login page
+//   }
+// };
   // dropdown props
   const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
   const btnDropdownRef = React.createRef();
@@ -64,50 +64,25 @@ const handleClick = (e) => {
         >
           Admin Layout
         </span>
-        <Link href={"/admin/dashboard"} legacyBehavior>
-          <a
-            href="#pablo"
-            className={
+        <Link href="/admin/dashboard" className={
               "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
-            }
-            onClick={handleClick}
-            
-          >
-            Dashboard
-          </a>
+            } >
+              Dashboard
+        
         </Link>
-        <Link href="/admin/settings" legacyBehavior>
-          <a
-            href="#pablo"
-            className={
+        <Link href="/admin/settings" className={
               "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
-            }
-          
-          >
-            Settings
-          </a>
+            } >
+         Settings
         </Link>
-        <Link href="/admin/tables" legacyBehavior>
-          <a
-            href="#pablo"
-            className={
-              "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
-            }
-            
-          >
-            Tables
-          </a>
+        <Link href="/admin/tables"  className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+            >
+          Tables
         </Link>
-        <Link href="/admin/maps" legacyBehavior> 
-          <a
-            href="#pablo"
-            className={
+        <Link href="/admin/maps"  className={
               "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
-            }
-           
-          >
-            Maps
-          </a>
+            } > 
+          Maps
         </Link>
         <div className="h-0 mx-4 my-2 border border-solid border-blueGray-100" />
         <span

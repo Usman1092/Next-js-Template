@@ -15,9 +15,9 @@ import Admin from "layouts/Admin.js";
 export default function Dashboard({children}) {
   return (
     <>
-   <PagesDropdown>
+   {/* <PagesDropdown>
     <div>
-    {children}
+    {children} */}
       <div className="flex flex-wrap">
         
         <div className="w-full xl:w-8/12 mb-12 xl:mb-0 px-4">
@@ -35,8 +35,8 @@ export default function Dashboard({children}) {
           <CardSocialTraffic />
         </div>
       </div>
-     </div>
-      </PagesDropdown>
+     {/* </div> */}
+       {/* </PagesDropdown> */}
     </>
   );
 }
