@@ -1,8 +1,26 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import Link from "next/link";
 import { createPopper } from "@popperjs/core";
+import { useRouter } from "next/router";
+import nookies from 'nookies'
+
 
 const PagesDropdown = () => {
+  const router = useRouter();
+const [token, setToken] = useState(null);
+
+useEffect(() => {
+  const cookies = nookies.get();
+  setToken(cookies.authToken);
+}, []);
+console.log(token);
+const handleClick = (e) => {
+  if (!token) {
+    e.preventDefault(); // Prevent the default link behavior
+   
+    router.push("/auth/login"); // Redirect to the login page
+  }
+};
   // dropdown props
   const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
   const btnDropdownRef = React.createRef();
@@ -20,6 +38,7 @@ const PagesDropdown = () => {
   };
   return (
     <>
+     <div className="pages-dropdown">
       <a
         className="lg:text-white lg:hover:text-blueGray-200 text-blueGray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
         href="#pablo"
@@ -51,6 +70,7 @@ const PagesDropdown = () => {
             className={
               "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
             }
+            onClick={handleClick}
             
           >
             Dashboard
@@ -145,6 +165,9 @@ const PagesDropdown = () => {
             Profile
           </a>
         </Link>
+       
+      </div>
+    
       </div>
     </>
   );
