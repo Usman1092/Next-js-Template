@@ -1,60 +1,125 @@
-import React,{ useState} from "react";
+import React, { useState } from "react";
 import Link from "next/link";
-import { auth,provider,gitProvider } from "components/firebase";
-import {signInWithPopup,signInWithEmailAndPassword} from 'firebase/auth';
-import nookies from 'nookies';
+import { auth, provider, gitProvider } from "components/firebase";
+import { signInWithPopup, signInWithEmailAndPassword } from "firebase/auth";
+import nookies from "nookies";
 import { useRouter } from "next/router";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import{ColorRing} from 'react-loader-spinner';
+import Swal from 'sweetalert2'
 // layout for page
 
 import Auth from "layouts/Auth.js";
 
 export default function Login() {
-const router = useRouter();
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+  const Swal = require('sweetalert2')
+  const googleAuth = () => {
+    signInWithPopup(auth, provider)
+      .then(async (data) => {
+        const token = await data.user.getIdToken();
+        nookies.set(undefined, "authToken", token, { path: "/" });
+        Swal.fire({
+          title: 'Success!',
+          text: 'You are LogIn successfully',
+          icon: 'success',
+          confirmButtonText: 'Okay'
+        })
+    
 
-const googleAuth=()=>{
-signInWithPopup(auth,provider).then(async(data)=>{
-  const token=await data.user.getIdToken();
-  nookies.set(undefined,"authToken",token,{path:"/"});
-  router.push('/admin/dashboard');
-})
-.catch((error) => {
-  console.error("Error signing in with Google:", error);
-  alert("Error signing in with Google: " + error.message);
-});
-};
+      setTimeout(() => {
+        setLoading(true); // Stop loading
+        router.push("/admin/dashboard");
+      }, 3000);  // Delay of 4 seconds
+     
+      })
+      .catch((error) => {
+        console.error("Error signing in with Google:", error);
+        alert("Error signing in with Google: " + error.message);
+      });
+  };
 
-const gitAuth=()=>{
-  signInWithPopup(auth,gitProvider).then(async(dta)=>{
-    const token=await dta.user.getIdToken();
-    nookies.set(undefined,"authToken",token,{path:"/"});
-    router.push('/admin/dashboard');
-  })
-  .catch((error) => {
-    console.error("Error signing in with GitHub:", error);
-    alert("Error signing in with GitHub: " + error.message);
-  });
-};
+  const gitAuth = () => {
+    signInWithPopup(auth, gitProvider)
+      .then(async (dta) => {
+        const token = await dta.user.getIdToken();
+        nookies.set(undefined, "authToken", token, { path: "/" });
+        Swal.fire({
+          title: 'Success!',
+          text: 'You are LogIn successfully',
+          icon: 'success',
+          confirmButtonText: 'Okay'
+        })
+    
 
-const[email,setEmail]=useState('');
-  const[password,setPassword]=useState('');
-  
- 
+      setTimeout(() => {
+        setLoading(true); // Stop loading
+        router.push("/admin/dashboard");
+      }, 3000);  // Delay of 4 seconds
+     
+      })
+      .catch((error) => {
+        console.error("Error signing in with GitHub:", error);
+        alert("Error signing in with GitHub: " + error.message);
+      });
+  };
 
-const SignInEmail=async()=>{
-  await signInWithEmailAndPassword(auth,email,password)
-  
-  .then(async(userCredential)=>{
-    const token=await userCredential.user.getIdToken();
-    nookies.set(undefined,"authToken",token,{path:"/"});
-    router.push('/admin/dashboard');
-  })
-  .catch((error) => {
-    console.error("Error signing in with Email:", error);
-    alert("Error signing in with Email: " + error.message);
-  });
-};
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const SignInEmail = async () => {
+    setLoading(true); 
+    await signInWithEmailAndPassword(auth, email, password)
+      .then(async (userCredential) => {
+        const token = await userCredential.user.getIdToken();
+        nookies.set(undefined, "authToken", token, { path: "/" });
+        Swal.fire({
+          title: 'Success!',
+          text: 'You are LogIn successfully',
+          icon: 'success',
+          confirmButtonText: 'Okay'
+        })
+    
+
+      setTimeout(() => {
+        setLoading(true); // Stop loading
+        router.push("/admin/dashboard");
+      }, 3000);  // Delay of 4 seconds
+     
+      })
+      .catch((error) => {
+        console.error("Error signing in with Email:", error);
+       
+        toast.error("Error signing in with Email: " + error.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        
+      });
+      setLoading(false); // Stop loading
+  };
   return (
     <>
+     {loading && (
+        <div className="loader-wrapper">
+          <ColorRing
+            visible={true}
+            height="80"
+            width="80"
+            ariaLabel="color-ring-loading"
+            wrapperStyle={{}}
+            wrapperClass="color-ring-wrapper"
+            colors={['ffffff']}
+          />
+        </div>
+      )}
       <div className="container mx-auto px-4 h-full">
         <div className="flex content-center items-center justify-center h-full">
           <div className="w-full lg:w-4/12 px-4">
@@ -101,7 +166,7 @@ const SignInEmail=async()=>{
                       type="email"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="Email"
-                      onChange={(e)=>setEmail(e.target.value)}
+                      onChange={(e) => setEmail(e.target.value)}
                     />
                   </div>
 
@@ -116,7 +181,7 @@ const SignInEmail=async()=>{
                       type="password"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="Password"
-                      onChange={(e)=>setPassword(e.target.value)}
+                      onChange={(e) => setPassword(e.target.value)}
                     />
                   </div>
                   <div>
@@ -165,6 +230,21 @@ const SignInEmail=async()=>{
           </div>
         </div>
       </div>
+      <ToastContainer />
+      <style jsx>{`
+        .loader-wrapper {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(255, 255, 255, 0.8);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          z-index: 1000;
+        }
+      `}</style>
     </>
   );
 }

@@ -50,11 +50,8 @@ export default function CardStats({
             </span>
             <span className="whitespace-nowrap">{statDescripiron}</span>
           </p>
-        
         </div>
-        
       </div>
-      
     </>
   );
 }

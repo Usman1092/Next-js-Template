@@ -14,11 +14,12 @@ export default function Index() {
           <div className="w-full md:w-8/12 lg:w-6/12 xl:w-6/12 px-4">
             <div className="pt-32 sm:pt-0">
               <h2 className="font-semibold text-4xl text-blueGray-600">
-              ZIMO TEAM- Design And Build The System That Are Changing The World.
+                ZIMO TEAM- Design And Build The System That Are Changing The
+                World.
               </h2>
               <p className="mt-4 text-lg leading-relaxed text-blueGray-500">
-           With A Remote Culture, Diversity Is Naturally In OUR DNA. Based Across The Globe
-                {" "}
+                With A Remote Culture, Diversity Is Naturally In OUR DNA. Based
+                Across The Globe{" "}
                 <a
                   href="https://tailwindcss.com/?ref=creativetim"
                   className="text-blueGray-600"
@@ -27,8 +28,8 @@ export default function Index() {
                 >
                   Making up Over 23{" "}
                 </a>
-               Different Nationalities . It features multiple HTML elements and it comes with dynamic
-                components for ReactJS, Vue and Angular.
+                Different Nationalities . It features multiple HTML elements and
+                it comes with dynamic components for ReactJS, Vue and Angular.
               </p>
               <div className="mt-12">
                 <a

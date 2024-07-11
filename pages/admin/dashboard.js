@@ -12,14 +12,10 @@ import PagesDropdown from "components/Dropdowns/PagesDropdown";
 
 import Admin from "layouts/Admin.js";
 
-export default function Dashboard({children}) {
+export default function Dashboard({ children }) {
   return (
     <>
-   {/* <PagesDropdown>
-    <div>
-    {children} */}
       <div className="flex flex-wrap">
-        
         <div className="w-full xl:w-8/12 mb-12 xl:mb-0 px-4">
           <CardLineChart />
         </div>
@@ -35,10 +31,8 @@ export default function Dashboard({children}) {
           <CardSocialTraffic />
         </div>
       </div>
-     {/* </div> */}
-       {/* </PagesDropdown> */}
     </>
   );
 }
 
- Dashboard.layout = Admin;
+Dashboard.layout = Admin;
